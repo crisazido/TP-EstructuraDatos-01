@@ -1,18 +1,14 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class ConjuntoTDA : MonoBehaviour
+public abstract class ConjuntoTDA<T>
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public abstract bool Add(T element);
+    public abstract bool Remove(T element);
+    public abstract bool Contains(T element);
+    public abstract string Show();
+    public abstract int Cardinality();
+    public abstract bool IsEmpty();
+    public abstract ConjuntoTDA<T> Union(ConjuntoTDA<T> otherSet);
+    public abstract ConjuntoTDA<T> Intersect(ConjuntoTDA<T> otherSet);
+    public abstract ConjuntoTDA<T> Difference(ConjuntoTDA<T> otherSet);
 }
