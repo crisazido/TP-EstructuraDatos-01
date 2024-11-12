@@ -5,16 +5,15 @@ using System.Collections.Generic;
 
 public class ABB : MonoBehaviour
 {
-    [SerializeField] GameObject circlePrefab;
-    [SerializeField] GameObject linePrefab; // Prefab para la línea
-    [SerializeField] Button inOrderButton; // Botón para In-Order
-    [SerializeField] Button preOrderButton; // Botón para Pre-Order
-    [SerializeField] Button postOrderButton; // Botón para Post-Order
-    [SerializeField] Button depthButton; // Botón para calcular la profundidad
+    [SerializeField] private GameObject linePrefab; // Prefab para la línea
+    public GameObject circlePrefab;
+    public Button inOrderButton; // Botón para In-Order
+    public Button preOrderButton; // Botón para Pre-Order
+    public Button postOrderButton; // Botón para Post-Order
+    public Button depthButton; // Botón para calcular la profundidad
+    public int[] myArray = { 20, 10, 1, 26, 35, 40, 18, 12, 15, 14, 30, 23 };
 
-    int[] myArray = { 20, 10, 1, 26, 35, 40, 18, 12, 15, 14, 30, 23 };
-
-    void Start()
+    private void Start()
     {
         // Asignar métodos a los botones
         inOrderButton.onClick.AddListener(HandleInOrder);
@@ -26,7 +25,7 @@ public class ABB : MonoBehaviour
         StartBinaryTree(myArray);
     }
 
-    void StartBinaryTree(int[] array)
+    private void StartBinaryTree(int[] array)
     {
         // Limpia la escena de círculos y líneas previas
         foreach (var obj in GameObject.FindGameObjectsWithTag("Circle"))
@@ -47,7 +46,7 @@ public class ABB : MonoBehaviour
         CreateBinaryTree(array, startPosition, verticalSpacing, horizontalSpacing, 0, positions);
     }
 
-    void CreateBinaryTree(int[] array, Vector2 position, float verticalSpacing, float horizontalSpacing, int index, Vector2[] positions)
+    private void CreateBinaryTree(int[] array, Vector2 position, float verticalSpacing, float horizontalSpacing, int index, Vector2[] positions)
     {
         if (index < array.Length)
         {
@@ -82,7 +81,7 @@ public class ABB : MonoBehaviour
         }
     }
 
-    void DrawLine(Vector2 start, Vector2 end)
+    public void DrawLine(Vector2 start, Vector2 end)
     {
         if (linePrefab != null)
         {
@@ -95,31 +94,31 @@ public class ABB : MonoBehaviour
     }
 
     // Métodos para manejar los botones y reordenar los círculos
-    void HandleInOrder()
+    public void HandleInOrder()
     {
         List<int> result = InOrderTraversal(myArray, 0);
         StartBinaryTree(result.ToArray());
     }
 
-    void HandlePreOrder()
+    public void HandlePreOrder()
     {
         List<int> result = PreOrderTraversal(myArray, 0);
         StartBinaryTree(result.ToArray());
     }
 
-    void HandlePostOrder()
+    public void HandlePostOrder()
     {
         List<int> result = PostOrderTraversal(myArray, 0);
         StartBinaryTree(result.ToArray());
     }
 
-    void HandleCalculateDepth()
+    public void HandleCalculateDepth()
     {
         int depth = CalculateDepth(0); // Comenzar desde la raíz (índice 0)
         Debug.Log("Profundidad del árbol: " + depth);
     }
 
-    int CalculateDepth(int index)
+    private int CalculateDepth(int index)
     {
         if (index >= myArray.Length) return 0; // Si el índice está fuera de los límites, no hay nodo.
 
@@ -132,7 +131,7 @@ public class ABB : MonoBehaviour
     }
 
     // Recorridos
-    List<int> InOrderTraversal(int[] array, int index)
+    private List<int> InOrderTraversal(int[] array, int index)
     {
         List<int> result = new List<int>();
         if (index < array.Length)
@@ -144,7 +143,7 @@ public class ABB : MonoBehaviour
         return result;
     }
 
-    List<int> PreOrderTraversal(int[] array, int index)
+    private List<int> PreOrderTraversal(int[] array, int index)
     {
         List<int> result = new List<int>();
         if (index < array.Length)
@@ -156,7 +155,7 @@ public class ABB : MonoBehaviour
         return result;
     }
 
-    List<int> PostOrderTraversal(int[] array, int index)
+    private List<int> PostOrderTraversal(int[] array, int index)
     {
         List<int> result = new List<int>();
         if (index < array.Length)
